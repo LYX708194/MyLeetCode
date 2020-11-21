@@ -83,11 +83,13 @@ public class Solution148 {
     public ListNode sortList3(ListNode head){
         if (head == null || head.next == null)  return head;
         ListNode slow = head,fast = head;
+        //找到链表中点
         while (fast.next != null && fast.next.next != null){
             slow = slow.next;
             fast = fast.next.next;
         }
         ListNode mid = slow.next;
+        //将链表断开成两边
         slow.next = null;
         ListNode leftHead = sortList3(head);
         ListNode rightHead = sortList3(mid);
