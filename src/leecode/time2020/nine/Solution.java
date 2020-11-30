@@ -9,7 +9,7 @@ import java.util.*;
  * @author lyx
  * @date 2020/9/1 13:30
  */
-public class Solution09 {
+public class Solution {
 
 
 
@@ -1441,7 +1441,7 @@ class Node {
     }
 
     public static void main(String[] args) {
-        Solution09 solution09 = new Solution09();
+        Solution solution09 = new Solution();
         solution09.coinChange(new int[]{1,2,5},11);
     }
 

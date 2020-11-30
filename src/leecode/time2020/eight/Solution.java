@@ -8,7 +8,7 @@ import java.util.Queue;
  * @author lyx
  * @date 2020/8/29 21:42
  */
-public class Solution08 {
+public class Solution {
 
 
 
