@@ -1,4 +1,4 @@
-package leecode.time2020.sort;
+package leecode.sort;
 
 /**
  * 选择排序  稳定的排序算法(取决于此条件中间有无等于号 arrays[j] < arrays[minIndex])，现在此算法是稳定的

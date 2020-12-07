@@ -1,4 +1,4 @@
-package leecode.time2020.sort;
+package leecode.sort;
 
 /**
  * 冒泡排序  稳定的算法

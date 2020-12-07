@@ -1,4 +1,4 @@
-package leecode.time2020.entity;
+package leecode.entity;
 
 /**
  * @author lyx

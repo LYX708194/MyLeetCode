@@ -1,6 +1,6 @@
 package leecode.time2020.ten;
 
-import leecode.time2020.entity.ListNode;
+import leecode.entity.ListNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;

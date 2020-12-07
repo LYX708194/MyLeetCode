@@ -1,6 +1,6 @@
 package leecode.time2020.ten;
 
-import leecode.time2020.entity.TreeNode;
+import leecode.entity.TreeNode;
 
 import java.util.*;
 

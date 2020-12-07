@@ -1,6 +1,6 @@
 package leecode.offer;
 
-import leecode.time2020.entity.TreeNode;
+import leecode.entity.TreeNode;
 
 import java.util.HashMap;
 import java.util.Map;

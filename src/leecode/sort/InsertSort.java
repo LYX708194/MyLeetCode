@@ -1,4 +1,4 @@
-package leecode.time2020.sort;
+package leecode.sort;
 
 /**
  *

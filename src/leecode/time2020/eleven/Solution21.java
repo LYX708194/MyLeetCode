@@ -1,6 +1,6 @@
 package leecode.time2020.eleven;
 
-import leecode.time2020.entity.ListNode;
+import leecode.entity.ListNode;
 
 /**
  * 将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。 

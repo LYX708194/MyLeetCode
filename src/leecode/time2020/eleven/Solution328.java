@@ -1,6 +1,6 @@
 package leecode.time2020.eleven;
 
-import leecode.time2020.entity.ListNode;
+import leecode.entity.ListNode;
 
 /**
  *

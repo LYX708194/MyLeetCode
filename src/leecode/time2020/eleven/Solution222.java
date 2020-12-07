@@ -1,6 +1,6 @@
 package leecode.time2020.eleven;
 
-import leecode.time2020.entity.TreeNode;
+import leecode.entity.TreeNode;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
