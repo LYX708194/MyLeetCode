@@ -53,7 +53,6 @@ public class Solution718 {
 
     /**
      * 滑动窗口
-     *
      * @param A
      * @param B
      * @return
@@ -61,11 +60,13 @@ public class Solution718 {
     public int findLength2(int[] A, int[] B){
         int max = 0;
         int n = A.length,m = B.length;
+        //B不变，A往前移
         for (int i = 0; i < n; i++) {
             int len = Math.min(m,n-i);
             int maxLen = maxLength(A,B,i,0,len);
             max = Math.max(max,maxLen);
         }
+        //A不变，B往前移
         for (int i = 0; i < m; i++) {
             int len = Math.min(n,m-i);
             int maxLen = maxLength(A,B,0,i,len);
