@@ -55,8 +55,6 @@ package leecode.time2020.twelve;
  */
 public class Solution860 {
 
-//    CodeGlance
-
 
 
     public boolean lemonadeChange(int[] bills) {
