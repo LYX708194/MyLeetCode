@@ -72,6 +72,28 @@ public class Solution738 {
         return Integer.parseInt(String.valueOf(S));
     }
 
+    /**
+     * 贪心,1111累加法,最后肯定是无数个1相加
+     * @author lyx
+     * @date 2020/12/15 10:27
+     * @return
+     */
+    public int monotoneIncreasingDigits4(int N){
+        //贪心,1111累加法,最后肯定是无数个1相加
+        //最大数为 10^9，所以可以从 111111111 开始加起
+        int n = 111111111;
+        int res = 0;
+        //一个位数最多加到9
+        for (int i = 0; i < 9; i++) {
+            //超出范围的就把n降幂
+            while (res + n > N){
+                n /= 10;
+            }
+            res += n;
+        }
+        return res;
+    }
+
 
     /**
      * 贪心算法，对于 N 的每一位数字，我们构建答案 ans 的下一位数字。
