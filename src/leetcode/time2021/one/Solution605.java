@@ -27,7 +27,20 @@ package leetcode.time2021.one;
  * @date 2021/1/1 12:58
  */
 public class Solution605 {
+
     public boolean canPlaceFlowers(int[] flowerbed, int n) {
+        int m = flowerbed.length;
+        for (int i = 0; i < m; i++) {
+            if (flowerbed[i] == 0 && (i == 0 || flowerbed[i-1] == 0) && (i == m-1 || flowerbed[i+1] == 0)){
+                n--;
+                if (n <= 0) return true;
+                flowerbed[i] = 1;
+            }
+        }
+        return n <= 0;
+    }
+
+    public boolean canPlaceFlowers2(int[] flowerbed, int n) {
         int count = 0;
         int m = flowerbed.length;
         int prev = -1;
@@ -37,6 +50,10 @@ public class Solution605 {
                     count += i / 2;
                 } else {
                     count += (i - prev - 2) / 2;
+                }
+                //优化，当可以种入n支花的时候已经成功了，可以退出了
+                if (count >= n) {
+                    return true;
                 }
                 prev = i;
             }
@@ -49,4 +66,5 @@ public class Solution605 {
         }
         return count >= n;
     }
+
 }
