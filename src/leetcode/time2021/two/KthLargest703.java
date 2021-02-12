@@ -60,6 +60,7 @@ public class KthLargest703 {
 
     public int add(int val) {
         queue.offer(val);
+        //优先队列中个数超过k个，弹出最小的
         if (queue.size() > k){
             queue.poll();
         }
