@@ -92,7 +92,6 @@ public class xiecheng {
 
     public static void main(String[] args){
         Scanner in = new Scanner(System.in);
-
         int[] packets = stringToIntegerArray(in.nextLine().trim());
         int n = Integer.parseInt(in.nextLine().trim());
 
