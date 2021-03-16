@@ -100,6 +100,42 @@ public class Solution10 {
         return dp[m][n];
     }
 
+    public boolean isMatch3(String s, String p) {
+        int m = s.length(),n = p.length();
+        //dp[i][j]表示s的前i个字符可以和p的前j个字符匹配
+        boolean[][] f = new boolean[m + 1][n + 1];
+        f[0][0] = true;
+        //总共分为三种情况：1、p的最后一个位置是正常字符，那么就需要看此位置是否匹配和之前的是否匹配
+        //                2、p的最后一个字符是'.'，能匹配任何字符，直接根据之前结果判断
+        //                3、p的最后一个字符是'*'，代表p的倒数第二个字符可以重复0-n次
+        for (int i = 0; i <= m; i++) {
+            for (int j = 0; j <= n; j++) {
+                //分成空正则和非空正则两种
+                if (j == 0) {
+                    //只有当空正则且待匹配字符串也为空时为true
+                    f[i][j] = i == 0;
+                } else {
+                    //非空正则分为两种情况 * 和 非*
+                    if (p.charAt(j - 1) != '*') {
+                        if (i > 0 && (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.')) {
+                            f[i][j] = f[i - 1][j - 1];
+                        }
+                    } else {
+                        //匹配0个
+                        if (j >= 2) {
+                            f[i][j] |= f[i][j - 2];
+                        }
+                        //匹配多个
+                        if (i >= 1 && j >= 2 && (s.charAt(i - 1) == p.charAt(j - 2) || p.charAt(j - 2) == '.')) {
+                            f[i][j] |= f[i - 1][j];
+                        }
+                    }
+                }
+            }
+        }
+        return f[m][n];
+    }
+
     /**
      * 递归
      */
