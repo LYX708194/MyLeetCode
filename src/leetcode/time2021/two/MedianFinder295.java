@@ -35,8 +35,7 @@ import java.util.PriorityQueue;
  * @date 2021/2/3 16:55
  */
 public class MedianFinder295 {
-    //大顶堆和小顶堆个数之和
-    private int count;
+
     //维持前一半，大顶堆
     private PriorityQueue<Integer> maxHeap;
     //维持后一半，小顶堆
@@ -44,34 +43,29 @@ public class MedianFinder295 {
 
     /** initialize your data structure here. */
     public MedianFinder295() {
-        count = 0;
+        //大顶堆，存较小的数
         maxHeap = new PriorityQueue<>((o1, o2) -> o2 - o1);
-        //默认为从小到大
+        //默认为从小到大，存较大的数
         minHeap = new PriorityQueue<>();
     }
 
     /**
-     * 添加数保证，大顶堆最大的数小于小顶堆最小的数
-     *          大顶堆元素个数和小顶堆元素个数相等或者多 1
+     * 保证 maxHeap <= minHeap,minHeap最多只比maxHeap多1
      */
     public void addNum(int num) {
-        count += 1;
-        maxHeap.add(num);
-        minHeap.add(maxHeap.poll());
-        // 如果两个堆合起来的元素个数是奇数，小顶堆要拿出堆顶元素给大顶堆，
-        if ((count & 1) != 0) {
+        if (maxHeap.size() != minHeap.size()){
+            //minHeap较多，先进小顶堆，再取最小的放进大顶堆
+            minHeap.add(num);
             maxHeap.add(minHeap.poll());
+        }else{
+            //两者一样答，先放大顶堆，取最大的放进小顶堆
+            maxHeap.add(num);
+            minHeap.add(maxHeap.poll());
         }
     }
 
     public double findMedian() {
-        if ((count & 1) == 0) {
-            // 如果两个堆合起来的元素个数是偶数，数据流的中位数就是各自堆顶元素的平均值
-            return (double) (maxHeap.peek() + minHeap.peek()) / 2;
-        } else {
-            // 如果两个堆合起来的元素个数是奇数，数据流的中位数大顶堆的堆顶元素
-            return (double) maxHeap.peek();
-        }
+        return maxHeap.size() != minHeap.size() ? minHeap.peek() : (minHeap.peek() + maxHeap.peek()) / 2.0;
     }
 
 }
