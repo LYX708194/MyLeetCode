@@ -1,5 +1,7 @@
 package leetcode.sort;
 
+import java.util.Stack;
+
 /**
  *
  * 快排  不稳定的排序算法
@@ -31,10 +33,35 @@ public class QuickSort {
         array[left] = pivot;
         return left;
     }
+    /**
+     * 非递归实现栈
+     */
+    private static int[] quickSortOP(int[] array,int left,int right){
+        Stack<Integer> stack = new Stack<>();
+        int k;
+        if (left < right){
+            stack.push(left);
+            stack.push(right);
+            while (!stack.isEmpty()){
+                //右边界，左边界
+                int j = stack.pop(),i = stack.pop();
+                k = partition(array,i,j);
+                if (i < k - 1){
+                    stack.push(i);
+                    stack.push(k-1);
+                }
+                if (k + 1 < j){
+                    stack.push(k+1);
+                    stack.push(j);
+                }
+            }
+        }
+        return array;
+    }
 
 
     public static void main(String[] args) {
-        QuickSort.quickSort(new int[]{2,9,11,5,45,23,55,67,12,21},0,9);
+        QuickSort.quickSortOP(new int[]{2,9,11,5,45,23,55,67,12,21},0,9);
     }
 
 }
