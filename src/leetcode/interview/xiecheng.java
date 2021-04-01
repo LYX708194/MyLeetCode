@@ -1,13 +1,85 @@
 package leetcode.interview;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * @author lyx
  * @date 2021/3/4 19:02
  */
 public class xiecheng {
+
+    static int ans = Integer.MAX_VALUE;
+    static Map<String,Integer> map1 = new HashMap<>();
+    static Map<String,LinkedList<String>> map2 = new HashMap<>();
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = Integer.parseInt(sc.nextLine());
+        String[] packs = sc.nextLine().split("\\s+");
+        String[] prices = sc.nextLine().split("\\s+");
+        String[] value = sc.nextLine().split("\\s+");
+        for (int i = 0; i < packs.length; i++) {
+            map1.put(packs[i], Integer.valueOf(prices[i]));
+        }
+        for (int i = 0; i < packs.length; i++) {
+            for (String s:packs[i].split(",")) {
+                LinkedList<String> list = map2.getOrDefault(s,new LinkedList<>());
+                list.add(packs[i]);
+                map2.put(s,list);
+            }
+        }
+        dfs(new boolean[value.length],value,0);
+        System.out.println(ans == Integer.MAX_VALUE ? -1 : ans);
+    }
+    private static void dfs(boolean[] has,String[] value,int sum){
+        int i = 0;
+        while (i < has.length && has[i++]) ;
+        if (i == has.length)    ans = Math.min(sum,ans);
+        for (int j = 0; j < value.length; j++) {
+            if (has[j]) continue;
+            for (String s:map2.get(value[j])) {
+                sum += map1.get(s);
+                has[j] = true;
+                dfs(has,value,sum);
+                sum -= map1.get(s);
+                has[j] = false;
+            }
+        }
+    }
+
+    public static void main1(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            str.append(sc.nextLine().trim() + " ");
+        }
+        String[] strs = str.toString().split("\\s+");
+        Set<String> set = new HashSet<>();
+        int i = 0,n = strs.length;
+        while (i < n){
+            if (strs[i].equals("from") || strs[i].equals("join") || strs[i].equals("on")){
+                if(i < n-1 && strs[i+1].equals("(")){
+                    i++;
+                    continue;
+                }
+                for (String s:strs[i+1].split(",")) {
+                    if (!set.contains(s)){
+                        System.out.println(s);
+                        set.add(s);
+                    }
+                }
+            }else if (strs[i].equals(")")){
+                for (String s:strs[i+1].split(",")) {
+                    if (!set.contains(s)){
+                        System.out.println(s);
+                        set.add(s);
+                    }
+                }
+            }
+            i++;
+        }
+    }
+
 
 //    public static void main(String[] args) {
 //        int ans = 0;
@@ -90,7 +162,7 @@ public class xiecheng {
         return ans;
     }
 
-    public static void main(String[] args){
+    public static void main2(String[] args){
         Scanner in = new Scanner(System.in);
         int[] packets = stringToIntegerArray(in.nextLine().trim());
         int n = Integer.parseInt(in.nextLine().trim());
