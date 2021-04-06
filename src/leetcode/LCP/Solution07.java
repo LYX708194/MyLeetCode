@@ -39,10 +39,39 @@ package leetcode.LCP;
  */
 public class Solution07 {
 
-    int ans = 0;
+
+    public int numWays2(int n, int[][] relation, int k) {
+        //dp[i][j]表示第i轮传给编号j的人的方案数
+        int[][] dp = new int[k+1][n];
+        dp[0][0] = 1;
+        for (int i = 0; i < k; i++) {
+            for (int[] a : relation) {
+                dp[i+1][a[1]] += dp[i][a[0]];
+            }
+        }
+        return dp[k][n-1];
+    }
+
+    public int numWays3(int n, int[][] relation, int k) {
+        //dp[i][j]表示第i轮传给编号j的人的方案数,空间优化
+        int[] dp = new int[n];
+        dp[0] = 1;
+        for (int i = 0; i < k; i++) {
+            int[] cnt = new int[n];
+            for (int[] a : relation) {
+                cnt[a[1]] += dp[a[0]];
+            }
+            dp = cnt;
+        }
+        return dp[n-1];
+    }
+
+
+    int ans;
     boolean[][] graph;
 
     public int numWays(int n, int[][] relation, int k) {
+        ans = 0;
         graph = new boolean[n][n];
         for (int[] a : relation) {
             graph[a[0]][a[1]] = true;
@@ -51,8 +80,8 @@ public class Solution07 {
         return ans;
     }
     private void dfs(int cur,int k,int n){
-        if (cur == n-1 && k == 0){
-            ans++;
+        if (k == 0){
+            if(cur == n-1)  ans++;
             return;
         }
         for (int i = 0; i < n; i++) {
