@@ -1,5 +1,9 @@
 package leetcode.time2021.three;
 
+import java.util.HashSet;
+import java.util.PriorityQueue;
+import java.util.Set;
+
 /**丑数
  * 我们把只包含质因子 2、3 和 5 的数称作丑数（Ugly Number）。求按从小到大的顺序的第 n 个丑数。
  *
@@ -30,11 +34,36 @@ public class Solution264_49 {
         for(int i = 1; i < n; i++) {
             int n2 = dp[a] * 2, n3 = dp[b] * 3, n5 = dp[c] * 5;
             dp[i] = Math.min(Math.min(n2, n3), n5);
+            //如果相等则对应的指针+1
             if(dp[i] == n2) a++;
             if(dp[i] == n3) b++;
             if(dp[i] == n5) c++;
         }
         return dp[n - 1];
+    }
+
+    public int nthUglyNumber2(int n) {
+        int[] factors = {2, 3, 5};
+        //去重操作
+        Set<Long> seen = new HashSet<Long>();
+        //小顶堆，第n此出堆得即为所求
+        PriorityQueue<Long> heap = new PriorityQueue<Long>();
+        //初始化
+        seen.add(1L);
+        heap.offer(1L);
+        int ugly = 0;
+        for (int i = 0; i < n; i++) {
+            long curr = heap.poll();
+            ugly = (int) curr;
+            //对于当前丑数可能产生得三个丑数家去堆中，并去重
+            for (int factor : factors) {
+                long next = curr * factor;
+                if (seen.add(next)) {
+                    heap.offer(next);
+                }
+            }
+        }
+        return ugly;
     }
 
 }
