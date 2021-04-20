@@ -23,6 +23,32 @@ package leetcode.time2021.one;
  */
 public class Solution28 {
 
+    /**
+     * kmp算法
+     * @author lyx
+     * @date 2021/4/20 10:51
+     * @return
+     */
+    public int strStr3(String haystack, String needle) {
+        int n = haystack.length(), m = needle.length();
+        if (m == 0) return 0;
+        //创建前缀数组
+        int[] pi = new int[m];
+        for (int i = 1,j = 0; i < m; i++) {
+            while (j > 0 && needle.charAt(i) != needle.charAt(j)){
+                j = pi[j-1];
+            }
+            if (needle.charAt(i) == needle.charAt(j))   j++;
+            pi[i] = j;
+        }
+        for (int i = 0,j = 0; i < n; i++) {
+            while (j > 0 && haystack.charAt(i) != needle.charAt(j)) j = pi[j-1];
+            if (haystack.charAt(i) == needle.charAt(j)) j++;
+            if (j == m) return i - m + 1;
+        }
+        return -1;
+    }
+
     public int strStr(String haystack, String needle) {
         int n1 = haystack.length(),n2 = needle.length();
         for (int i = 0; i < n1 - n2 + 1; i++) {
