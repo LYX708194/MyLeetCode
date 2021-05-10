@@ -63,11 +63,7 @@ public class Solution872 {
         List<Integer> list1 = new ArrayList<>(),list2 = new ArrayList<>();
         dfs(root1,list1);
         dfs(root2,list2);
-        if (list1.size() != list2.size())   return false;
-        for (int i = 0; i < list1.size(); i++) {
-            if (list1.get(i) != list2.get(i))   return false;
-        }
-        return true;
+        return list1.equals(list2);
     }
     private void dfs(TreeNode node,List<Integer> list){
         if (node == null)   return;
