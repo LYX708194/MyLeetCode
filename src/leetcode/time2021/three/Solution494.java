@@ -47,6 +47,7 @@ public class Solution494 {
             return 0;
         }
         int n = nums.length, neg = diff / 2;
+        //dp[i][j] 表示在数组 nums 的前 i 个数中选取元素，使得这些元素之和等于 j 的方案数
         int[][] dp = new int[n + 1][neg + 1];
         dp[0][0] = 1;
         for (int i = 1; i <= n; i++) {
