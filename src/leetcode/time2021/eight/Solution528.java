@@ -15,9 +15,9 @@ public class Solution528 {
         pre = new int[w.length];
         pre[0] = w[0];
         for (int i = 1; i < w.length; i++) {
-            pre[i] = pre[i-1] + w[i];w
+            pre[i] = pre[i-1] + w[i];
         }
-        total = Arrays.stream().sum();
+        total = Arrays.stream(w).sum();
     }
 
     public int pickIndex() {
